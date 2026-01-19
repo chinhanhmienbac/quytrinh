@@ -89,9 +89,9 @@
                         </select>
                     </div>
                     <div class="md:col-span-2 flex items-center h-full pb-2">
-                        <label class="inline-flex items-center cursor-pointer select-none" title="Tích chọn: Chỉ hiển thị tài liệu của ĐÚNG đơn vị này (Bỏ qua phân cấp)">
+                        <label class="inline-flex items-center cursor-pointer select-none" title="Tích chọn: Chỉ hiển thị tài liệu dùng riêng tại đơn vị này">
                             <input type="checkbox" id="strictUnitFilter" class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" onchange="handleFilterChange()">
-                            <span class="ml-2 text-xs font-bold text-gray-500 tracking-wider">Chỉ lọc chính xác ĐV</span>
+                            <span class="ml-2 text-xs text-gray-500 tracking-wider">Chỉ tài liệu dùng riêng</span>
                         </label>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
         <div class="modal-container bg-white w-96 mx-auto rounded shadow-lg z-50">
             <div class="modal-content py-4 text-left px-6">
                 <div class="flex justify-between items-center pb-3"><p class="text-xl font-bold text-blue-900">Đăng nhập</p><div class="cursor-pointer z-50" onclick="closeLoginModal()"><i class="fa-solid fa-times text-gray-500"></i></div></div>
-                <div class="mb-4"><label class="block text-gray-700 text-sm font-bold mb-2">Tài khoản</label><div class="flex items-center border rounded w-full py-2 px-3 bg-gray-100"><i class="fa-solid fa-user mr-2 text-gray-400"></i><span>****@pvgas.com</span></div></div>
+                <div class="mb-4"><label class="block text-gray-700 text-sm font-bold mb-2">Tài khoản</label><div class="flex items-center border rounded w-full py-2 px-3 bg-gray-100"><i class="fa-solid fa-user mr-2 text-gray-400"></i><span>****@pvgaslpg.com.vn</span></div></div>
                 <div class="mb-4"><label class="block text-gray-700 text-sm font-bold mb-2">Mật khẩu</label><input type="password" id="loginPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter') performLogin()"></div>
                 <div class="flex justify-end pt-2"><button onclick="performLogin()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Xác thực</button></div>
             </div>
@@ -188,14 +188,18 @@
         <div class="modal-container bg-white w-full max-w-lg mx-4 rounded shadow-lg z-50 overflow-hidden flex flex-col max-h-[90vh]">
             <div class="modal-header flex justify-between items-center p-3 border-b bg-gray-50 flex-none"><h3 class="text-base font-bold text-gray-700"><i class="fa-solid fa-sitemap mr-1"></i> Thiết lập Phân Cấp</h3><div class="cursor-pointer" onclick="closeHierarchyModal()"><i class="fa-solid fa-times text-gray-500 hover:text-red-500 text-lg"></i></div></div>
             <div class="modal-body p-4 overflow-y-auto bg-gray-50 flex-grow">
-                <div class="bg-white p-3 rounded border mb-4"><h4 class="text-xs font-bold text-blue-800 uppercase mb-2">Thêm liên kết Mẹ - Con</h4><div class="grid grid-cols-2 gap-3 mb-2"><div><label class="block text-xs text-gray-500 mb-1">Đơn vị Mẹ</label><input type="text" id="hParent" list="listUnits" class="w-full border p-1.5 rounded text-sm focus:ring-1 focus:ring-blue-500" placeholder="Chọn mẹ..." onfocus="handleDatalistFocus(event)" onblur="handleDatalistBlur(event)"></div><div><label class="block text-xs text-gray-500 mb-1">Đơn vị Con</label><input type="text" id="hChild" list="listUnits" class="w-full border p-1.5 rounded text-sm focus:ring-1 focus:ring-blue-500" placeholder="Chọn con..." onfocus="handleDatalistFocus(event)" onblur="handleDatalistBlur(event)"></div></div><button onclick="addHierarchyLink()" class="w-full bg-blue-600 text-white text-xs font-bold py-1.5 rounded hover:bg-blue-700 transition">Thêm Liên Kết</button></div>
+                <div class="bg-white p-3 rounded border mb-4"><h4 class="text-xs font-bold text-blue-800 uppercase mb-2">Thêm liên kết Khối - bộ phận</h4><div class="grid grid-cols-2 gap-3 mb-2"><div><label class="block text-xs text-gray-500 mb-1">Đơn vị lớn (Khối)</label><input type="text" id="hParent" list="listUnits" class="w-full border p-1.5 rounded text-sm focus:ring-1 focus:ring-blue-500" placeholder="Chọn đơn vị lớn (Khối)..." onfocus="handleDatalistFocus(event)" onblur="handleDatalistBlur(event)"></div><div><label class="block text-xs text-gray-500 mb-1">Đơn vị nhỏ</label><input type="text" id="hChild" list="listUnits" class="w-full border p-1.5 rounded text-sm focus:ring-1 focus:ring-blue-500" placeholder="Chọn đơn vị..." onfocus="handleDatalistFocus(event)" onblur="handleDatalistBlur(event)"></div></div><button onclick="addHierarchyLink()" class="w-full bg-blue-600 text-white text-xs font-bold py-1.5 rounded hover:bg-blue-700 transition">Thêm Liên Kết</button></div>
                 <div class="bg-white p-3 rounded border"><h4 class="text-xs font-bold text-gray-700 uppercase mb-2 border-b pb-1">Cấu trúc hiện tại</h4><div id="hierarchyList" class="space-y-1 max-h-60 overflow-y-auto"></div></div>
             </div>
             <div class="modal-footer flex justify-end p-3 border-t bg-white flex-none"><button onclick="closeHierarchyModal()" class="px-3 py-1.5 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 font-bold text-xs">Đóng</button></div>
         </div>
     </div>
 
-    <script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check-compat.js"></script>
+	<script>
         // --- CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyBxfLtfKy9QQSxqboUD5T5MzkF58rtmKc0",
@@ -209,12 +213,18 @@
         };
 
         firebase.initializeApp(firebaseConfig);
+		const appCheck = firebase.appCheck();
+appCheck.activate(
+    '6LczK0ssAAAAALjCOZ3duO7WAmvcA83MgbVm6RtP', 
+    true // Cho phép tự động refresh token
+);
+		
         const db = firebase.firestore();
         const auth = firebase.auth();
         const COLLECTION_NAME = "documents";
         const SYSTEM_COLLECTION = "system";
 
-        const CLIENT_ID = "588583798336-o4gjnfqaupmmdp8mi38o9m8r4n0bbghs.apps.googleusercontent.com";
+        const CLIENT_ID = "775388048399-5cbs3abkkovo724jqf9rh5k4eo0jb3tt.apps.googleusercontent.com";
         const API_KEY = ""; 
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
         const SCOPES = "https://www.googleapis.com/auth/drive.file";
@@ -306,7 +316,7 @@
         function handleEditButtonClick() { if (isEditMode) toggleEditMode(false); else { if (currentUser) toggleEditMode(true); else openLoginModal(); } }
         function openLoginModal() { document.body.classList.add('modal-active'); els.loginModal.classList.remove('opacity-0', 'pointer-events-none'); els.loginPassword.value = ''; els.loginPassword.focus(); }
         function closeLoginModal() { document.body.classList.remove('modal-active'); els.loginModal.classList.add('opacity-0', 'pointer-events-none'); }
-        function performLogin() { const email = "tailieu@pvgas.com"; const password = els.loginPassword.value.trim(); if (!password) { showNotify("Vui lòng nhập mật khẩu!", "red"); return; } showNotify("Đang xác thực...", "blue"); auth.signInWithEmailAndPassword(email, password).then(() => { closeLoginModal(); showNotify("Đăng nhập thành công!", "green"); toggleEditMode(true); }).catch((error) => { showNotify("Mật khẩu không đúng!", "red"); }); }
+        function performLogin() { const email = "tailieu@pvgaslpg.com.vn"; const password = els.loginPassword.value.trim(); if (!password) { showNotify("Vui lòng nhập mật khẩu!", "red"); return; } showNotify("Đang xác thực...", "blue"); auth.signInWithEmailAndPassword(email, password).then(() => { closeLoginModal(); showNotify("Đăng nhập thành công!", "green"); toggleEditMode(true); }).catch((error) => { showNotify("Mật khẩu không đúng!", "red"); }); }
 
         function fetchDocuments() {
             db.collection(COLLECTION_NAME).orderBy('date', 'desc').limit(200).onSnapshot((snapshot) => {
